@@ -98,8 +98,9 @@ test(
         );
 
         $vite->preloadImages();
+        $vite->preloadStyles();
 
-        $tags = $vite->createTags("main.js", "consent-banner.js");
+        $tags = $vite->createTags("main.js", "consent-banner.js", "public/scss/themes/admin/admin.scss", "public/css/plus.css", "public/img/favicon.ico");
 
         eq(
             explode("\n", $tags->preload),
@@ -111,6 +112,9 @@ test(
                 '<link rel="modulepreload" href="/dist/assets/shared.83069a53.js" />',
                 // Preload `views/foo.js` entry point script:
                 '<link rel="modulepreload" href="/dist/assets/consent-banner.0e3b3b7b.js" />',
+                '<link rel="preload" as="style" type="text/css" href="/dist/assets/admin-B8_LVhy3.css" />',
+                '<link rel="preload" as="style" type="text/css" href="/dist/assets/plus-DwWFnKP0.css" />',
+                '<link rel="preload" as="image" type="image/x-icon" href="/dist/assets/favicon-zR_S-YMI.ico" />',
             ],
         );
 
@@ -123,6 +127,8 @@ test(
                 '<link rel="stylesheet" href="/dist/assets/shared.a834bfc3.css" />',
                 // CSS imported by the consent-banner entry point script:
                 '<link rel="stylesheet" href="/dist/assets/consent-banner.8ba40300.css" />',
+                '<link rel="stylesheet" href="/dist/assets/admin-B8_LVhy3.css" />',
+                '<link rel="stylesheet" href="/dist/assets/plus-DwWFnKP0.css" />',
             ]
         );
 
